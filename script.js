@@ -1,5 +1,5 @@
-var timeDisplayEl = $("#currentDay");
-
+var dateDisplayEl = $("#currentDay");
+var saveBtn = $("#saveBtn");
 
 var blockNine = $("#0900");
 var blockTen = $("#1000");
@@ -13,45 +13,54 @@ var blockSeventeen = $("#1700");
 
 var timeBlocks = [blockNine = {
         boxName: blockNine,
-        time: 09
+        time: 09,
+        memo: ""
     },
     blockTen = {
         boxName: blockTen,
-        time: 10
+        time: 10,
+        memo: ""
     },
     blockEleven = {
         boxName: blockEleven,
-        time: 11
+        time: 11,
+        memo: ""
     },
     blockTwelve = {
         boxName: blockTwelve,
-        time: 12
+        time: 12,
+        memo: ""
     },
     blockThirteen = {
         boxName: blockThirteen,
-        time: 13
+        time: 13,
+        memo: ""
     },
     blockFourteen = {
         boxName: blockFourteen,
-        time: 14
+        time: 14,
+        memo: ""
     }, 
     blockFifteen = {
         boxName: blockFifteen,
-        time: 15
+        time: 15,
+        memo: ""
     },
     blockSixteen = {
         boxName: blockSixteen,
-        time: 16
+        time: 16,
+        memo: ""
     },
     blockSeventeen = {
         boxName: blockSeventeen,
-        time: 17
+        time: 17,
+        memo: ""
     }];
 
 //WHEN I open the planner
 //THEN the current day is displayed at the top of the calendar
 var displayDate = moment().format("MMMM Do, YYYY");
-timeDisplayEl.text(displayDate);
+dateDisplayEl.text(displayDate);
 
 // WHEN I view the timeblocks for that day
 // THEN each timeblock is color coded to indicate whether it is in the past, present, or future
@@ -73,7 +82,24 @@ var checkTime = function(){
 
 // WHEN I click the save button for that timeblock
 // THEN the text for that event is saved in local storage
+saveBtn.on('click', function(event){
+    event.preventDefault();
+    console.log("saved!")
+    var saveMemo = $('#description').value;
+    localStorage.setItem("memoItem", JSON.stringify(saveMemo));
+})
 
+// WHEN I refresh the page
+// THEN the saved events persist
+// var populateMemos = function () {
+//     var memoItem = JSON.parse(localStorage.getItem("memoItem"));
 
+//     if(memoItem !== null){
+//         $(".description").text = memoItem;
+//     } else {
+//         return;
+//     }
+// }
 
+// populateMemos();
 checkTime();
